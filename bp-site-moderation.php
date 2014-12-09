@@ -502,7 +502,6 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 	 * This is so the super admin can clearly see the URL.
 	 */
 	public function add_site_url_to_loop() {
-		global $blogs_template;
 	?>
 
 		<span class="item-site-url" style="font-size:90%;"><a href="<?php echo get_home_url( bp_get_blog_id() ); ?>"><?php echo get_home_url( bp_get_blog_id() ); ?></a></span>
