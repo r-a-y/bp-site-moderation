@@ -431,7 +431,7 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 		remove_all_actions( 'bp_directory_blogs_actions' );
 
 		// customize the blog loop
-		add_action( 'bp_directory_blogs_actions', array( $this, 'add_buttons' ) );
+		add_action( 'bp_directory_blogs_actions', array( $this, 'blogs_loop_right_side' ) );
 		add_action( 'bp_directory_blogs_item',    array( $this, 'add_site_creator_to_loop' ) );
 		add_filter( 'bp_get_blog_permalink',      array( $this, 'modify_blogs_loop_permalink' ) );
 		add_filter( 'bp_get_blog_avatar',         array( $this, 'toggle_blog_permalink' ) );
@@ -448,11 +448,21 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 
 
 	/**
-	 * Add 'Approve' / Decline buttons to blogs loop.
+	 * Modify right side of blogs loop.
+	 *
+	 * - Add 'Approve' / Decline buttons to blogs loop.
+	 * - Add 'Created by X' line
 	 */
-	public function add_buttons() {
+	public function blogs_loop_right_side() {
 		$this->add_button( 'approve' );
 		$this->add_button( 'decline' );
+
+		global $blogs_template;
+	?>
+
+		<span class="item-site-creator" style="font-size:90%;"><?php printf( __( 'Created by %s', 'bp-site-moderation' ), '<a href="' . bp_core_get_user_domain( $blogs_template->blog->admin_user_id ) . '">' . bp_core_get_username( $blogs_template->blog->admin_user_id )  . '</a>' ); ?></span>
+
+	<?php
 	}
 
 	/**
@@ -497,7 +507,7 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 		global $blogs_template;
 	?>
 
-		<span class="item-site-creator" style="font-size:90%;"><?php printf( __( 'Created by %s.', 'bp-site-moderation' ), '<a href="' . bp_core_get_user_domain( $blogs_template->blog->admin_user_id ) . '">' . bp_core_get_username( $blogs_template->blog->admin_user_id )  . '</a>' ); ?></span>
+		<span class="item-site-url" style="font-size:90%;"><a href="<?php echo get_home_url( bp_get_blog_id() ); ?>"><?php echo get_home_url( bp_get_blog_id() ); ?></a></span>
 
 	<?php
 	}
