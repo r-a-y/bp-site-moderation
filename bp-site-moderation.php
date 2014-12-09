@@ -378,8 +378,6 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 
 	/**
 	 * Add a "Pending" tab on the sites directory page only for super admins.
-	 *
-	 * @todo "Pending" tab doesn't work without JS at the moment.
 	 */
 	public function add_site_directory_tab() {
 		if ( ! is_super_admin() ) {
