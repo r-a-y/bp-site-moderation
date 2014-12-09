@@ -430,7 +430,7 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 
 		// customize the blog loop
 		add_action( 'bp_directory_blogs_actions', array( $this, 'blogs_loop_right_side' ) );
-		add_action( 'bp_directory_blogs_item',    array( $this, 'add_site_creator_to_loop' ) );
+		add_action( 'bp_directory_blogs_item',    array( $this, 'add_site_url_to_loop' ) );
 		add_filter( 'bp_get_blog_permalink',      array( $this, 'modify_blogs_loop_permalink' ) );
 		add_filter( 'bp_get_blog_avatar',         array( $this, 'toggle_blog_permalink' ) );
 
@@ -497,11 +497,11 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 	}
 
 	/**
-	 * Adds the site creator to the blogs loop.
+	 * Adds the site URL to the blogs loop.
 	 *
-	 * This is so the super admin can clearly see who created the site.
+	 * This is so the super admin can clearly see the URL.
 	 */
-	public function add_site_creator_to_loop() {
+	public function add_site_url_to_loop() {
 		global $blogs_template;
 	?>
 
