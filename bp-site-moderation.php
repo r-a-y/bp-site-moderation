@@ -76,6 +76,7 @@ class BP_Site_Moderation {
 		add_action( 'bp_before_blogs_loop',          array( $this, 'add_template_notices_to_sites_directory' ) );
 		add_action( 'bp_before_create_blog_content', array( $this, 'add_text_overrides' ) );
 		add_action( 'bp_after_create_blog_content',  array( $this, 'remove_text_overrides' ) );
+		add_action( 'wp_logout',                     array( $this, 'reset_blogs_scope_cookie' ) );
 
 		// do what you feel like!
 		do_action( 'bp_site_moderation_loaded', $this );
@@ -379,6 +380,18 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 		}
 
 		bp_core_load_template( apply_filters( 'bp_blogs_screen_index', 'blogs/index' ) );
+	}
+
+	/**
+	 * Resets BP's blogs scope cookie to 'all' during logout.
+	 *
+	 * Only reset if the blogs scope is set to 'pending' since the 'Pending' tab
+	 * will not be available when logged out.
+	 */
+	public function reset_blogs_scope_cookie() {
+		if ( ! empty( $_COOKIE['bp-blogs-scope'] ) && $this->scope === $_COOKIE['bp-blogs-scope'] ) {
+			@setcookie( 'bp-blogs-scope', 'all', 0, '/' );
+		}
 	}
 
 	/**
