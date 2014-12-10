@@ -276,6 +276,11 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 			return $retval;
 		}
 
+		// don't block super admins!
+		if ( is_super_admin() ) {
+			return $retval;
+		}
+
 		wp_die( __( 'This site is pending moderation by a site administrator.', 'bp-site-moderation' ), __( 'Site Temporarily Unavailable', 'bp-site-moderation' ), array( 'response' => 410 ) );
 	}
 
