@@ -423,7 +423,7 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 			return $r;
 		}
 
-		if ( $this->scope === $r['scope'] ) {
+		if ( $this->scope === $r['scope'] && is_super_admin() ) {
 			$this->do_modify_blogs = true;
 		}
 
