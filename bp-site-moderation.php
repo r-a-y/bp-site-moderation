@@ -324,7 +324,9 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 		// decline
 		} else {
 			// need multisite admin functions file
-			require ABSPATH . 'wp-admin/includes/ms.php';
+			if ( ! function_exists( 'wpmu_delete_blog' ) ) {
+				require ABSPATH . 'wp-admin/includes/ms.php';
+			}
 
 			// delete site entirely
 			wpmu_delete_blog( $blog_id, true );
