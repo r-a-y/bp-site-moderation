@@ -542,11 +542,20 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 
 	public function gettext_overrides( $translated_text = '', $untranslated_text = '', $domain = '' ) {
 		switch ( $untranslated_text ) {
-			case '<a href="%1$s">%2$s</a> is your new site.  <a href="%3$s">Login</a> as "%4$s" using your existing password.' :
-				$translated_text = __( '%2$s is your new site.  However, your site is pending moderation by a site administrator.  Once your site is approved, you will receive an email notification.  Then, you can login and create content for your newly-created site.', 'bp-site-moderation' );
-
+			case 'Congratulations! You have successfully registered a new site.' :
+				$translated_text = __( 'Congratulations!', 'bp-site-moderation' );
 				break;
 
+			case '%s is your new site.' :
+				$translated_text = sprintf( __( 'Your site request has been submitted and will be reviewed shortly. While you wait, why not <a href="%1$s">update your avatar</a> or <a href="%2$s">explore some recent blog posts</a>.', 'bp-site-moderation' ),
+					esc_url( bp_loggedin_user_domain() ),
+					esc_url( bp_get_activity_directory_permalink() )
+				);
+				break;
+
+			case '<a href="%1$s">Log in</a> as "%2$s" using your existing password.' :
+				$translated_text = '';
+				break;
 		}
 
 		return $translated_text;
