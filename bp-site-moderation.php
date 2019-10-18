@@ -442,6 +442,11 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 			return $retval;
 		}
 
+		// Nouveau: Do not show the "Visit Site" button
+		add_filter( 'bp_nouveau_get_blogs_buttons', function( $retval ) {
+			return false;
+		} );
+
 		// Make sure we fetch all pending sites
 		$r['user_id'] = 0;
 
