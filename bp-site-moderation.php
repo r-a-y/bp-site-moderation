@@ -697,8 +697,11 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 			$r['link_class']    .= ' button';
 		}
 
+		// Button-specific link class.
 		if ( 'decline' === $type ) {
 			$r['link_class'] .= ' confirm';
+		} else {
+			$r['link_class'] .= ' approve';
 		}
 
 		$r['link_href'] = wp_nonce_url(
