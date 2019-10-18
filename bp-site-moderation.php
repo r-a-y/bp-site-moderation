@@ -690,7 +690,13 @@ If you have questions about this, please feel free to contact us.', 'bp-site-mod
 			'link_class'    => 'blog-button',
 		);
 
-		// add confirm class just so admin can confirm the choice
+		// BP Nouveau-specific button arguments.
+		if ( function_exists( 'bp_nouveau' ) ) {
+			$r['parent_element'] = 'li';
+			$r['wrapper_class']  = '';
+			$r['link_class']    .= ' button';
+		}
+
 		if ( 'decline' === $type ) {
 			$r['link_class'] .= ' confirm';
 		}
